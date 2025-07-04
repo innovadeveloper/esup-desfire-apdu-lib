@@ -1,5 +1,5 @@
-/Users/kenny/Projects/SpringbootProjects/esup-desfire-apdu-lib/src/test/java/org/esupportail/desfire/service/DESFireAuthServiceTest.java
-/Users/kenny/Projects/SpringbootProjects/esup-desfire-apdu-lib/src/test/java/org/esupportail/desfire/service/DESFireApduServiceTest.java
-/Users/kenny/Projects/SpringbootProjects/esup-desfire-apdu-lib/src/test/java/org/esupportail/desfire/core/util/CryptoUtilsTest.java
-/Users/kenny/Projects/SpringbootProjects/esup-desfire-apdu-lib/src/test/java/org/esupportail/desfire/service/DESFireCompleteServiceTest.java
-/Users/kenny/Projects/SpringbootProjects/esup-desfire-apdu-lib/src/test/java/org/esupportail/desfire/examples/CompleteExampleTest.java
+/Users/mac/Documents/Projects/SpringBootProjects/esup-desfire-apdu-lib-v2/src/test/java/org/esupportail/desfire/service/DESFireCompleteServiceTest.java
+/Users/mac/Documents/Projects/SpringBootProjects/esup-desfire-apdu-lib-v2/src/test/java/org/esupportail/desfire/service/DESFireAuthServiceTest.java
+/Users/mac/Documents/Projects/SpringBootProjects/esup-desfire-apdu-lib-v2/src/test/java/org/esupportail/desfire/service/DESFireApduServiceTest.java
+/Users/mac/Documents/Projects/SpringBootProjects/esup-desfire-apdu-lib-v2/src/test/java/org/esupportail/desfire/core/util/CryptoUtilsTest.java
+/Users/mac/Documents/Projects/SpringBootProjects/esup-desfire-apdu-lib-v2/src/test/java/org/esupportail/desfire/examples/CompleteExampleTest.java

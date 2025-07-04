@@ -4,12 +4,14 @@ org/esupportail/desfire/core/util/Dump.class
 org/esupportail/desfire/service/DESFireCompleteService.class
 org/esupportail/desfire/service/DesfireUtils.class
 org/esupportail/desfire/core/DESFireEV1$Response.class
+org/esupportail/desfire/App.class
 org/esupportail/desfire/core/SimpleSCR.class
 org/esupportail/desfire/core/DESFireEV1$CommunicationSetting.class
 org/esupportail/desfire/core/DESFireEV1$1.class
 org/esupportail/desfire/service/ApduResponse.class
 org/esupportail/desfire/core/util/CMAC.class
 org/esupportail/desfire/service/DESFireCompleteService$1.class
+org/esupportail/desfire/service/PcscUsbService.class
 org/esupportail/desfire/exceptions/DesfireException.class
 org/esupportail/desfire/model/DesfireApplication.class
 org/esupportail/desfire/model/DesfireTag.class
@@ -19,6 +21,7 @@ org/esupportail/desfire/core/util/BitOp.class
 org/esupportail/desfire/service/DESFireAuthService$1.class
 org/esupportail/desfire/core/util/TripleDES.class
 org/esupportail/desfire/core/util/CRC16.class
+org/esupportail/desfire/service/PcscException.class
 org/esupportail/desfire/model/DesfireFile.class
 org/esupportail/desfire/service/DESFireApduService$1.class
 org/esupportail/desfire/core/DESFireEV1.class

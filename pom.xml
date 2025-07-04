@@ -17,15 +17,31 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
-    
+
     <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.16</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-reload4j</artifactId>
+            <version>2.0.16</version>
+        </dependency>
         <!-- Smart Card I/O -->
         <dependency>
             <groupId>io.github.jnasmartcardio</groupId>
             <artifactId>jnasmartcardio</artifactId>
             <version>0.2.7</version>
         </dependency>
-        
+
+<!--        <dependency>-->
+<!--            <groupId>javax.smartcardio</groupId>-->
+<!--            <artifactId>javax.smartcardio</artifactId>-->
+<!--            <version>1.0.1</version>-->
+<!--        </dependency>-->
+
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
