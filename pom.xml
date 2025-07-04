@@ -12,10 +12,11 @@
     <description>Lightweight Java library for DESFire EV1 APDU commands</description>
     
     <properties>
-        <java.version>8</java.version>
+
+<!--        <java.version>8</java.version>-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+<!--        <maven.compiler.source>8</maven.compiler.source>-->
+<!--        <maven.compiler.target>8</maven.compiler.target>-->
     </properties>
 
     <dependencies>
@@ -80,9 +81,11 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+<!--                    <source>${java.version}</source>-->
+<!--                    <target>${java.version}</target>-->
                     <encoding>${project.build.sourceEncoding}</encoding>
+                    <source>17</source>     <!-- ✅ Correcto -->
+                    <target>17</target>
                 </configuration>
             </plugin>
             
