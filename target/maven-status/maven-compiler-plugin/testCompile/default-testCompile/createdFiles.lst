@@ -1,0 +1,5 @@
+org/esupportail/desfire/core/util/CryptoUtilsTest.class
+org/esupportail/desfire/service/DESFireAuthServiceTest.class
+org/esupportail/desfire/examples/CompleteExampleTest.class
+org/esupportail/desfire/service/DESFireCompleteServiceTest.class
+org/esupportail/desfire/service/DESFireApduServiceTest.class
