@@ -166,6 +166,70 @@ public class DESFireCompleteService extends DESFireEV1 {
     // ================ ADDITIONAL COMMANDS ================
     
     /**
+     * Get version information with complete data parsing
+     */
+    public String getVersionComplete() {
+        try {
+            byte[] versionData = super.getVersion();
+            if (versionData != null) {
+                return parseVersionData(versionData);
+            }
+            return "Failed to get version";
+        } catch (Exception e) {
+            log.error("Failed to get version", e);
+            return "Error getting version: " + e.getMessage();
+        }
+    }
+    
+    /**
+     * Parse version data into human-readable format
+     */
+    private String parseVersionData(byte[] data) {
+        if (data == null || data.length < 28) {
+            return "Invalid version data (length: " + (data != null ? data.length : 0) + ")";
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append("DESFire Version Information:\n");
+        
+        // Hardware information (first 7 bytes)
+        sb.append("Hardware:\n");
+        sb.append("  Vendor ID: 0x").append(String.format("%02X", data[0])).append("\n");
+        sb.append("  Type: 0x").append(String.format("%02X", data[1])).append("\n");
+        sb.append("  Subtype: 0x").append(String.format("%02X", data[2])).append("\n");
+        sb.append("  Version: ").append(data[3]).append(".").append(data[4]).append("\n");
+        sb.append("  Storage size: 0x").append(String.format("%02X", data[5])).append("\n");
+        sb.append("  Protocol: 0x").append(String.format("%02X", data[6])).append("\n");
+        
+        // Software information (next 7 bytes)
+        sb.append("Software:\n");
+        sb.append("  Vendor ID: 0x").append(String.format("%02X", data[7])).append("\n");
+        sb.append("  Type: 0x").append(String.format("%02X", data[8])).append("\n");
+        sb.append("  Subtype: 0x").append(String.format("%02X", data[9])).append("\n");
+        sb.append("  Version: ").append(data[10]).append(".").append(data[11]).append("\n");
+        sb.append("  Storage size: 0x").append(String.format("%02X", data[12])).append("\n");
+        sb.append("  Protocol: 0x").append(String.format("%02X", data[13])).append("\n");
+        
+        // Batch and production information (last 14 bytes)
+        sb.append("Production:\n");
+        sb.append("  UID: ");
+        for (int i = 14; i < 21; i++) {
+            sb.append(String.format("%02X", data[i]));
+            if (i < 20) sb.append(" ");
+        }
+        sb.append("\n");
+        sb.append("  Batch: ");
+        for (int i = 21; i < 26; i++) {
+            sb.append(String.format("%02X", data[i]));
+            if (i < 25) sb.append(" ");
+        }
+        sb.append("\n");
+        sb.append("  Production date: Week ").append(data[26]).append("/").append(data[27]).append("\n");
+        
+        return sb.toString();
+    }
+    
+    /**
      * Change key
      */
     public boolean changeKey(byte keyNo, byte keyVersion, KeyType keyType, 

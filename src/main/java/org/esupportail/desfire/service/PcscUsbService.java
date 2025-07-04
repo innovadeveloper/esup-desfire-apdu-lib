@@ -14,9 +14,10 @@ import javax.smartcardio.ResponseAPDU;
 import javax.smartcardio.TerminalFactory;
 
 import org.apache.log4j.Logger;
+import javax.smartcardio.*;
 
-import jnasmartcardio.Smartcardio;
-import jnasmartcardio.Smartcardio.JnaPCSCException;
+//import jnasmartcardio.Smartcardio;
+//import jnasmartcardio.Smartcardio.JnaPCSCException;
 
 public class PcscUsbService {
 
@@ -25,13 +26,16 @@ public class PcscUsbService {
 	private Card card;
 	private CardTerminal cardTerminal;
 	private TerminalFactory context;
-	public CardTerminals terminals;
+	public List<CardTerminal> terminals;
 	
 	public PcscUsbService() {
-		Security.addProvider(new Smartcardio());
+//		Security.addProvider(new Smartcardio());
 		try {
-			context = TerminalFactory.getInstance("PC/SC", null, Smartcardio.PROVIDER_NAME);
-			terminals = context.terminals();
+			TerminalFactory factory = TerminalFactory.getDefault();
+			terminals = factory.terminals().list();
+
+//			context = TerminalFactory.getInstance("PC/SC", null, Smartcardio.PROVIDER_NAME);
+//			terminals = context.terminals();
 		} catch (Exception e) {
 			log.error("Exception retrieving context", e);
 		}
@@ -42,13 +46,14 @@ public class PcscUsbService {
 	}
 	
 	public String connection() throws CardException{
-		for (CardTerminal terminal : terminals.list()) {
-			if(!terminal.getName().contains("6121") && !terminal.getName().contains("SAM Reader") && terminal.isCardPresent()){
+		for (CardTerminal terminal : terminals) {
+//			if(!terminal.getName().contains("ACS ACR1581 1S Dual Reader(1)") && !terminal.getName().contains("SAM Reader") && terminal.isCardPresent()){
+			if(terminal.getName().contains("ACS ACR1581 1S Dual Reader(1)")){
 				cardTerminal = terminal;
 				try{
 					card = cardTerminal.connect("*");
 					return cardTerminal.getName();
-				}catch(JnaPCSCException e){
+				}catch(Exception e){
 					log.error("pcsc connection error", e);
 				}
 			}
@@ -56,9 +61,9 @@ public class PcscUsbService {
 		throw new CardException("No NFC reader found with card on it - NFC reader found : " + getNamesOfTerminals(terminals));
 	}
 
-	private String getNamesOfTerminals(CardTerminals terminals) throws CardException {
+	private String getNamesOfTerminals(List<CardTerminal> terminals) throws CardException {
 		List<String> terminalsNames = new ArrayList<String>();  
-		for (CardTerminal terminal : terminals.list()) {
+		for (CardTerminal terminal : terminals) {
 			terminalsNames.add(terminal.getName());
 		}
 		return terminalsNames.toString();
@@ -66,7 +71,7 @@ public class PcscUsbService {
 
 	public boolean isCardPresent() throws CardException{
 		try {
-			for (CardTerminal terminal : terminals.list()) {
+			for (CardTerminal terminal : terminals) {
 			try {
 				if(!terminal.getName().contains("6121") && !terminal.getName().contains("SAM Reader") && terminal.isCardPresent()) return true; 
 			} catch (CardException e) {
@@ -81,9 +86,15 @@ public class PcscUsbService {
 	
 	public String sendAPDU(String apdu) throws CardException{
 		ResponseAPDU answer = null;
+		log.info("sending apdu : " + apdu);
 		answer = card.getBasicChannel().transmit(new CommandAPDU(hexStringToByteArray(apdu)));
-		return byteArrayToHexString(answer.getBytes());
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) { throw new RuntimeException(e);}
 
+        String response = byteArrayToHexString(answer.getBytes());
+		log.info("response of apdu : " + response);
+		return response;
 	}
 
 	public String getCardId() throws CardException{

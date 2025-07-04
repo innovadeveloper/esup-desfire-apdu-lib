@@ -274,14 +274,7 @@ public class DESFireEV1 extends SimpleSCR {
      */
     public byte[] getVersion() {
         byte[] apdu = {(byte) 0x90, (byte) Command.GET_VERSION.getCode(), 0x00, 0x00, 0x00};
-        CommandAPDU command = new CommandAPDU(apdu);
-        ResponseAPDU response = transmit(command);
-        this.code = response.getSW2();
-        
-        if (response.getSW2() == Response.OPERATION_OK.getCode()) {
-            return response.getData();
-        }
-        return null;
+        return readDataFromCard(apdu);
     }
 
     /**

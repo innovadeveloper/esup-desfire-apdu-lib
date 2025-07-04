@@ -24,11 +24,19 @@ public class SimpleSCR {
 	private final static String ATR_ULTRALIGHT_C = "3b 8f 80 01 80 4f 0c a0 00 00 03 06 03 00 03 00 00 00 00 68";
 	private final static String ATR_DESFIRE_EV1 = "3b 81 80 01 80 80";
 
-	private Card card;
+	protected Card card;
 	private CardChannel channel;
 
 	public boolean connect() {
 		return connect(0);
+	}
+	
+	/**
+	 * Check if connected to a card
+	 * @return true if connected, false otherwise
+	 */
+	public boolean isConnected() {
+		return card != null;
 	}
 	
 	/**
@@ -63,6 +71,10 @@ public class SimpleSCR {
 	 * @return	<code>true</code> on success
 	 */
 	public boolean disconnect() {
+		if (card == null) {
+			return true; // Already disconnected
+		}
+		
 		try {
 			/* Open the disconnect implementation and check L249.
 			 * SCardDisconnect(cardId, (reset ? SCARD_LEAVE_CARD : SCARD_RESET_CARD));
